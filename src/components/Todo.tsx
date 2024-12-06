@@ -2,19 +2,19 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { addTodos } from "../redux/Action/Action";
-import { RootState } from "../redux/Store";
-// import {RootStore} from '../redux/Store'
+// import { RootState } from "../redux/Store";
 
 const Todo: React.FC = () => {
   const [input, setInput] = useState<string>("");
 
   const dispatch = useDispatch();
-  const todos = useSelector((state: RootState) => state.allTodos.todos);
+  // const todos = useSelector((state: RootState) => state.allTodos.todos); // that are used for fetch data from redux store
 
   interface Data {
     id: number;
-    title: string;
+    title: string; 
     completed: boolean;
+    isEditing : boolean;
   }
 
   const handleAddTodo = () => {
@@ -23,6 +23,7 @@ const Todo: React.FC = () => {
         id: Date.now(),
         title: input,
         completed: false,
+        isEditing: false,
       };
       dispatch(addTodos([newTodoObj])); // Dispatch array of todos
       setInput("");
@@ -48,13 +49,7 @@ const Todo: React.FC = () => {
           </button>
         </Link>
       </div>
-      {/* <ul>
-        {todos.map((todo: Data) => (
-          <li key={todo.id}>
-            <span>{todo.title}</span>
-          </li>
-        ))}
-      </ul> */}
+      
     </div>
   );
 };

@@ -19,7 +19,7 @@ const TodoTask: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-10 border-t">
+      <div className="mt-10 border-t bg-gray-200 h-full pb-10">
         <AllTask />
       </div>
     </div>
