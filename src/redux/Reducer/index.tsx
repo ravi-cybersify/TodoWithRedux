@@ -1,10 +1,8 @@
-// combine all reducers
-
 import { combineReducers } from "redux";
-import { setTodos } from "../Action/Action";
+import { todoReducers } from "./Reducer"; // Import the reducer correctly
 
 const reducers = combineReducers({
-    allTodos : setTodos,
+  allTodos: todoReducers, // Use the reducer function
 });
 
 export default reducers;

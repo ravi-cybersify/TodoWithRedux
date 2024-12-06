@@ -1,12 +1,15 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { setTodos } from "../redux/Action/Action";
+import { addTodos } from "../redux/Action/Action";
+import { RootState } from "../redux/Store";
+// import {RootStore} from '../redux/Store'
 
 const Todo: React.FC = () => {
   const [input, setInput] = useState<string>("");
 
   const dispatch = useDispatch();
+  const todos = useSelector((state: RootState) => state.allTodos.todos);
 
   interface Data {
     id: number;
@@ -15,15 +18,15 @@ const Todo: React.FC = () => {
   }
 
   const handleAddTodo = () => {
-
-    const newTodoObj:Data = {
-      id: Date.now(),
-      title: input,
-      completed: false
-    };
-    dispatch(setTodos([newTodoObj]));
-    console.log(newTodoObj,"ddfdsfdsfdsff");
-    setInput("");
+    if (input.trim()) {
+      const newTodoObj: Data = {
+        id: Date.now(),
+        title: input,
+        completed: false,
+      };
+      dispatch(addTodos([newTodoObj])); // Dispatch array of todos
+      setInput("");
+    }
   };
 
   return (
@@ -31,12 +34,12 @@ const Todo: React.FC = () => {
       <div className="flex gap-4 my-20">
         <input
           type="text"
-          placeholder="enter todo..."
+          placeholder="Enter todo..."
           value={input}
           onChange={(e) => setInput(e.target.value)}
           className="border shadow-lg px-2 py-1 w-72"
         />
-        <Link to={'/'}>
+        <Link to={"/"}>
           <button
             onClick={handleAddTodo}
             className="btn bg-blue-400 text-white rounded px-3 py-1 "
@@ -46,13 +49,11 @@ const Todo: React.FC = () => {
         </Link>
       </div>
       {/* <ul>
-        {
-            todos?.map((todo:Data)=>(
-                <li key={todo.id}>
-                    <span>{todo.data}</span>
-                </li>
-            ))
-        }
+        {todos.map((todo: Data) => (
+          <li key={todo.id}>
+            <span>{todo.title}</span>
+          </li>
+        ))}
       </ul> */}
     </div>
   );

@@ -6,8 +6,8 @@ interface Todo {
     completed: boolean;
 }
 
-export const setTodos = (todo:Todo[])=>{
-    console.log(todo,"fdsfjdslfdsjfldtodo")
+export const addTodos = (todo:Todo[])=>{
+    // console.log(todo,"fdsfjdslfdsjfldtodo")
     return {
         type : ActionTypes.ADD_TODOS,
         payload : todo,
